@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DEMO</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script>
+	// $(function(){
+	// 	$('#demo').click(function(){
+	// 		$.getJSON("http://cornelia.com.cn/i/post2.php?c=add&callback=?",{id: 10, name: "test"}, function(data){  
+ //     			 console.log(data.msg);  
+ //  			});  
+	// 		console.log('done.');
+	// 	});
+
+	// });
+$(function(){
+	$('#demo').click(function(){
+    	$.getJSON('http://cornelia.com.cn/i/post2.php?callback=?',{id:123,name:'mrc'},function(data){
+           	 console.log(data);
+    			}
+    		);
+		});
+	});	
+	</script>
+</head>
+<body>
+	<a href='#' id="demo">click</a>
+
+
+</body>
+</html>

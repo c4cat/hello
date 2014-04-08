@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<!--HTML5 doctype-->
+<html>
+
+    <head>
+        <script>
+        (function() {
+    if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) {
+        var msViewportStyle = document.createElement("style");
+        msViewportStyle.appendChild(
+            document.createTextNode("@-ms-viewport{width:auto!important}")
+        );
+        document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+    }
+})();
+</script>
+
+        <title>DEMO</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="stylesheet" type="text/css" href="css/icons.css" />    
+ 
+      <link rel="stylesheet" type="text/css" href="css/main.css"  />
+      <link rel="stylesheet" type="text/css" href="css/appframework.css"  />
+      <link rel="stylesheet" type="text/css" href="css/lists.css"  />
+      <link rel="stylesheet" type="text/css" href="css/forms.css"  />
+      <link rel="stylesheet" type="text/css" href="css/buttons.css"  />        
+      <link rel="stylesheet" type="text/css" href="css/badges.css"  />        
+      <link rel="stylesheet" type="text/css" href="css/grid.css"  />
+
+      <link rel="stylesheet" type="text/css" href="css/ios7.css"  /> 
+        
+        
+        <!-- uncomment for intel.xdk apps 
+        <script type="text/javascript" charset="utf-8" src="intelxdk.js"></script>
+        <script type="text/javascript" charset="utf-8" src="xhr.js"></script>
+        -->
+        <script type="text/javascript" charset="utf-8" src="./appframework.js"></script>
+        <!-- include af.desktopBrowsers.js on desktop browsers only -->
+        <script>
+
+            if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
+                var script = document.createElement("script");
+                script.src = "plugins/af.desktopBrowsers.js";
+                var tag = $("head").append(script);
+                //$.os.desktop=true;
+            }
+
+          //  $.feat.nativeTouchScroll=true;
+        </script>        
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.actionsheet.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.css3animate.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.passwordBox.js"></script>          
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.scroller.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.selectBox.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.touchEvents.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.touchLayer.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.popup.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/appframework.ui.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/fade.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/flip.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/slide.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/slideDown.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/slideUp.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.slidemenu.js"></script>
+        
+
+        <script type="text/javascript">
+            /* This function runs once the page is loaded, but intel.xdk is not yet active */
+            //$.ui.animateHeaders=false;
+            var search=document.location.search.toLowerCase().replace("?","");
+            // $.ui.useOSThemes=true;
+            // if(search.length>0) //Android fix has too many buggy issues on iOS - can't preview with $.os.android
+            // {
+
+            //    $.ui.useOSThemes=true;
+            //     if(search=="win8")
+            //         $.os.ie=true;
+                $.ui.ready(function(){
+                    $("#afui").get(0).className='ios7';
+                });
+            // }
+            
+            var webRoot = "./";
+            // $.os.android=true;
+            //$.ui.autoLaunch = false;
+            $.ui.openLinksNewTab = false;
+            $.ui.splitview=false;
+            
+
+            $(document).ready(function(){
+                  // $.ui.launch();
+
+            });
+            
+            /* This code is used to run as soon as intel.xdk activates */
+            var onDeviceReady = function () {
+                intel.xdk.device.setRotateOrientation("portrait");
+                intel.xdk.device.setAutoRotate(false);
+                webRoot = intel.xdk.webRoot + "";
+                //hide splash screen
+                intel.xdk.device.hideSplashScreen();
+                $.ui.blockPageScroll(); //block the page from scrolling at the header/footer
+            };
+            document.addEventListener("intel.xdk.device.ready", onDeviceReady, false);
+
+            function showHide(obj, objToHide) {
+                var el = $("#" + objToHide)[0];
+
+                if (obj.className == "expanded") {
+                    obj.className = "collapsed";
+                } else {
+                    obj.className = "expanded";
+                }
+                $(el).toggle();
+
+            }
+
+
+            if($.os.android||$.os.ie||search=="android"){
+                $.ui.ready(function(){
+                    $("#main .list").append("<li><a id='toggleAndroidTheme'>Toggle Theme Color</a></li>");
+                    var $el=$("#afui");
+                    $("#toggleAndroidTheme").bind("click",function(e){
+                        if($el.hasClass("light"))
+                            $el.removeClass("light");
+                        else
+                            $el.addClass("light");
+                    });
+                });
+            }                        
+        </script>
+
+</head>
+
+    <body>
+        <div id="afui">
+            <!-- this is the splashscreen you see. -->
+            <div id="splashscreen" class='ui-loader heavy'>
+                <br>
+                <br>    <span class='ui-icon ui-icon-loading spin'></span>
+                <h1>Loading...</h1>
+
+            </div>
+            <div id="header">
+                <a id='menubadge' onclick='af.ui.toggleSideMenu()' class='menuButton'></a>                 
+            </div>
+            <div id="content">
+                <div title='首页' id="main" class="panel" selected="true" data-tab="navbar_home">
+<!--                     <h2 class='expanded' onclick='showHide(this,"main_info");'>欢迎.</h2>
+                    <p id='main_info'>Welcome.</p> -->
+                    <ul class="list">
+                        <li class='red'>
+                            <a href="#af" id='aflink' class='icon heart mini'>情景模式</a>
+                        </li>
+                        <li class="blue">
+                            <a href="#setting" class='icon settings mini'>设定</a>
+                        </li>
+                        <li class="blue">
+                            <a href="#check" class='icon magnifier mini'>查询</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- af -->
+                <div title="情景模式" id="af" class="panel" data-vav="">
+                    <ul class="list">
+                        <li><a href="#mode1">模式1</a></li>
+                        <li><a href="#mode2">模式2</a></li>
+                        <li><a href="#mode3">模式3</a></li>
+                    </ul>
+                    <footer>
+                        <a href="#addmode" id='navbar_home' class='icon add'>添加情景模式
+                        </a>
+                    </footer>
+                </div>
+                
+                <!-- setting -->
+                <div id="setting" class="panel" title="设置" data-nav="">
+                <p></p>
+                <br>
+                <form>
+                <div class="input-group">
+                    <label for="tmp">温度</label><input id="tmp" type="number" placeholder=" ">
+                    <label for="light">亮度</label><input  id="light" type="number" placeholder=" ">
+                    <label>开关</label>
+                    <input id="open" type="radio" name="swi" value="1"><label for="open">开</label>
+                    <input id="close" type="radio" name="swi" value="2"><label for="close">关</label>
+                    <br style="clear:both">
+
+                    <input type="submit" class="button" value="Submit" style='float:right;'>
+                </div>
+                </form>
+                </div>
+                <!-- setting -->
+                <div id="check" class="panel" title="查询" data-nav="">
+                    <ul class="list">
+                        <li>当前模式 ：<span id="now-mode">默认</span></li>
+                        <li>当前温度 ：<span id="now-tmp">11</span>°c</li>
+                        <li>当前亮度 ：<span id="now-light">99</span></li>
+                        <li>当前开关 ：<span id="now-swi">开</span></li>
+                    </ul>
+                    <footer>
+                        <a href="#" id='check-refresh' class='icon refresh mini'>刷新数据</a>
+                    </footer>
+                </div>
+                <!-- addmode -->
+                <div id="addmode" class="panel" title="设置" data-nav="">
+                <p></p>
+                <br>
+                <form>
+                <div class="input-group">
+                    <label for="addmode-name">模式名称</label><input id="addmode-name" type="number" placeholder=" ">
+                    <label for="addmode-tmp">默认温度</label><input id="addmode-tmp" type="number" placeholder=" ">
+                    <label for="addmode-light">默认亮度</label><input  id="addmode-light" type="number" placeholder=" ">
+                    <label>开关状态</label>
+                    <input id="addmode-open" type="radio" name="addmode-swi" value="3"><label for="addmode-open">开</label>
+                    <input id="addmode-close" type="radio" name="addmode-swi" value="4"><label for="addmode-close">关</label>
+                    <label for="addmode-dec">模式描述</label><textarea name="addmode-dec" id="addmode-dec" cols="30" rows="10"></textarea>
+                    <br> 
+                </div>
+                </form>
+
+                    <footer>
+                        <a href="#" id='addmode-submit' class='icon check mini'>提交</a>
+                    </footer>
+                   
+                </div>
+                <!-- Plugins -->
+                <div title="帮助" id="help" class="panel" data-header="testheader">
+                        <h2 class='expanded' onclick='showHide(this,"afweb_info");'>帮助.</h2>
+                    <p id='afweb_info'>Help.</p>
+                    <ul class="list">
+                        <li>
+                            <a href="#webslider">1.如何使用？</a>
+                        </li>
+                    </ul>
+                    <br/>
+                    <br/>
+                </div>
+            </div>
+            <!-- navbar -->
+            <header id="testheader">
+                <a id="backButton" onclick="$.ui.goBack()" class='button'>返回</a>
+                    <h1>设置</h1>
+                <a class="button icon refresh mini" style="float:right">刷新</a>
+            </header>
+            <!-- 两侧 -->
+            <nav>
+                <ul class="list">
+                    <li>
+                        <a href="#af" class='icon heart mini'>情景模式</a>
+                    </li>
+                    <li>
+                        <a href="#setting" class='icon settings mini'>设定</a>
+                    </li>
+                    <li>
+                        <a href="#check" class='icon magnifier mini'>查询</a>
+                    </li>
+
+                </ul>    
+            </nav>
+            <aside class='aside'>
+                暂无消息
+            </aside>
+        </div>
+        
+    </body>
+</html>
