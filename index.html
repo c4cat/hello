@@ -189,10 +189,11 @@
                     <input id="open" type="radio" name="swi" value="1"><label for="open">开</label>
                     <input id="close" type="radio" name="swi" value="2"><label for="close">关</label>
                     <br style="clear:both">
-
-                    <input type="submit" class="button" value="Submit" style='float:right;'>
                 </div>
                 </form>
+                <footer>
+                        <a href="#" id='setting-submit' class='icon check mini'>提交</a>
+                    </footer>
                 </div>
                 <!-- setting -->
                 <div id="check" class="panel" title="查询" data-nav="">
@@ -222,11 +223,21 @@
                     <br> 
                 </div>
                 </form>
-
                     <footer>
                         <a href="#" id='addmode-submit' class='icon check mini'>提交</a>
                     </footer>
-                   
+                </div>
+                <!-- mode-0 -->
+                <div id="mode1" class="panel" title="查看" data-nav="">
+                    <ul class="list">
+                        <li>当前模式 ：<span id="now-mode">模式1</span></li>
+                        <li>当前温度 ：<span id="now-tmp">11</span>°c</li>
+                        <li>当前亮度 ：<span id="now-light">99</span></li>
+                        <li>当前开关 ：<span id="now-swi">开</span></li>
+                    </ul>
+                    <footer>
+                        <a href="#" id='mode-choose-submit' class='icon check mini'>选择此模式</a>
+                    </footer>
                 </div>
                 <!-- Plugins -->
                 <div title="帮助" id="help" class="panel" data-header="testheader">
@@ -263,7 +274,9 @@
                 </ul>    
             </nav>
             <aside class='aside'>
-                暂无消息
+                <p>demo</p>
+                <p>版本号：ver 1.1</p>
+                <!-- <p>联系作者：i#cornelia.in</p> -->
             </aside>
         </div>
         
