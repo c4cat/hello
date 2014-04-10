@@ -384,8 +384,25 @@
     box-shadow:none;
     font-size:12px;
 }
-
+/* add */
 aside.aside{
     padding-top: 15px;
     text-align: center;
 }
+
+#afui_mask h1{
+    font-weight: normal;
+}
+.input-group.red{
+    background: #f2dede!important;
+    color: #a94442!important;
+    border-color: #ebccd1!important;
+    text-align: center;
+}
+.input-group.blue{
+    background: #d9edf7!important;
+    color: #31708f!important;
+    border-color: #bce8f1!important;
+    text-align: center;
+}
+
