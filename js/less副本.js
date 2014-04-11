@@ -5,19 +5,16 @@
 $(document).ready(function(){
 	//--- global ---///
 	//var s_tmp = $('#tmp').value();
-	function hide(){
-        $.ui.hideMask();
-    }
 
 	//--- submit setting ---//
 	$('#setting-submit').click(function(){
 		var tmp = $('#tmp').val(),
 			light = $('#light').val(),
 			open = $('input[name="swi"]:checked').val(),
-			type = 'update',
+			type = 'update';
 			//red is the count of the error ,not more than one
-			red = $('#setting-form').find('.red').length,
-			blue = $('#setting-form').find('.blue').length;
+			//red = $('#setting-form').find('.red').length,
+			//blue = $('#setting-form').find('.blue').length;
 			//form check
 			// if(tmp =='' || light =='' || open==''){
 			// 	console.log('step2');
@@ -34,19 +31,21 @@ $(document).ready(function(){
 			// 	return false;
 			// }
 
-			$.getJSON('http://localhost/~mrc/cornelia/i/action.php?callback=?',{type:type},function(data){
+			// $.getJSON('http://localhost/~mrc/cornelia/i/action.php?callback=?',{},function(data){
+   //         	 		console.log(data);
+   //         	 		if(red==0){
+   //         	 			$('#setting-form').append('<div class="input-group notice blue">成功!</div>');
+   //         	 		}else{
+   //         	 			$('#setting-form').find('.red').addClass('blue').html('成功!!');
+   //         	 		}
+   //         	 			$.ui.hideMask();
+   //  				}
+   //  			);
+				$.getJSON('http://localhost/~mrc/cornelia/i/action.php?callback=?',{tmp:'tmp'},function(data){
+					alert(123);
 					console.log(data);
-           	 		console.log(123);
-           	 		if(red==0){
-           	 			$('#setting-form').append('<div class="input-group notice blue">成功!</div>');
-           	 		}else{
-           	 			$('#setting-form').find('.red').addClass('blue').html('成功!!');
-           	 		}
-           	 			$.ui.hideMask();
-    				}
-    			);
-			console.log('done');
-			
+				});			
+
 	});
 	
 
