@@ -84,7 +84,7 @@ $(document).ready(function(){
 	});
 
 	//--- get data:check ---//
-	$('#get-check,#check-refresh').click(function() {
+	$('#get-check,#check-refresh,#left-get-check').click(function() {
 		$.getJSON(url, {type:'getcheck'}, function(data) {
 			$.ui.hideMask();
 			console.log(data);
@@ -100,19 +100,38 @@ $(document).ready(function(){
 		});
 	});
 	//--- get all of the mode ---//
-	$('#allmode').click(function() {
+	$('#allmode,left-allmode').click(function() {
 		$.getJSON(url, {type:'getall'}, function(data) {
 			$.ui.hideMask();
-			console.log(data);
-			$('#now-mode').html(data.name);
-			$('#now-tmp').html(data.tmp);
-			$('#now-light').html(data.light);
-			if(data.open == 0){
-				open = '关';
-			}else{
-				open = '开';
+			var i = 0;
+
+			//pring json data -> html
+			for(i;i<data.length;i++){
+				//1.modelist
+				var li = '<li><a href="#mode'+i+'">'+data[i].name+'</a></li>';
+				$('#modelist').append(li);
+				//2.body
+				
+				// <div id="mode1" class="panel" title="查看" data-nav="">
+    //                 <ul class="list">
+    //                     <li>当前模式 ：<span id="now-mode">--</span></li>
+    //                     <li>当前温度 ：<span id="now-tmp">--</span>°c</li>
+    //                     <li>当前亮度 ：<span id="now-light">--</span></li>
+    //                     <li>当前开关 ：<span id="now-swi">--</span></li>
+    //                 </ul>
+    //                 <footer>
+    //                     <a href="#" id='mode-choose-submit' class='icon check mini'>选择此模式</a>
+    //                 </footer>
+    //             </div>
+    			if(data.open == 0){open = '关';}else{open = '开';}
+				var div = '<div id="mode'+ i +'" class="panel" title="'+ data[i].name  +'" data-nav=""><ul class="list">';
+					div += '<li>温度 ：<span>'+ data[i].tmp +'</span></li>';
+					div += '<li>亮度 ：<span>'+ data[i].light +'</span></li>';
+					div += '<li>开关 ：<span>'+ open +'</span></li></ul>';
+					div += '<footer><a href="#" id="mode-choose-submit" class="icon check mini">选择此模式</a></footer>';
+					
+				console.log(data[i].name);
 			}
-			$('#now-swi').html(open);
 		});
 	});	
 

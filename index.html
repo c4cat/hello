@@ -166,12 +166,8 @@
                 </div>
                 <!-- af -->
                 <div title="情景模式" id="af" class="panel" data-vav="">
-                    <ul class="list">
-
-                        <li><a href="#mode1">模式1</a></li>
-                        <li><a href="#mode2">模式2</a></li>
-                        <li><a href="#mode3">模式3</a></li>
-
+                    <ul class="list" id="modelist">
+                    <!-- less.js -->
                     </ul>
                     <footer>
                         <a href="#addmode" id='navbar_home' class='icon add'>添加情景模式
@@ -263,13 +259,13 @@
             <nav>
                 <ul class="list">
                     <li>
-                        <a href="#af" class='icon heart mini'>情景模式</a>
+                        <a href="#af" id="left-allmode" class='icon heart mini'>情景模式</a>
                     </li>
                     <li>
                         <a href="#setting" class='icon settings mini'>设定</a>
                     </li>
                     <li>
-                        <a href="#check" id='get-check' class='icon magnifier mini check-link'  onclick="$.ui.showMask('查询中...')">查询</a>
+                        <a href="#check" id='left-get-check' class='icon magnifier mini check-link'  onclick="$.ui.showMask('查询中...')">查询</a>
                     </li>
 
                 </ul>    
