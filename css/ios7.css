@@ -406,3 +406,6 @@ aside.aside{
     text-align: center;
 }
 
+.mode-style{
+    overflow: hidden; display: block; -webkit-transform: none; -webkit-backface-visibility: hidden; -webkit-transition: none; transition: none; -webkit-transform-origin: 0% 0%;
+}

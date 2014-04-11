@@ -111,24 +111,13 @@ $(document).ready(function(){
 				var li = '<li><a href="#mode'+i+'">'+data[i].name+'</a></li>';
 				$('#modelist').append(li);
 				//2.body
-
-				// <div id="mode1" class="panel" title="查看" data-nav="">
-    //                 <ul class="list">
-    //                     <li>当前模式 ：<span id="now-mode">--</span></li>
-    //                     <li>当前温度 ：<span id="now-tmp">--</span>°c</li>
-    //                     <li>当前亮度 ：<span id="now-light">--</span></li>
-    //                     <li>当前开关 ：<span id="now-swi">--</span></li>
-    //                 </ul>
-    //                 <footer>
-    //                     <a href="#" id='mode-choose-submit' class='icon check mini'>选择此模式</a>
-    //                 </footer>
-    //             </div>
     			if(data.open == 0){open = '关';}else{open = '开';}
-				var div = '<div id="mode'+ i +'" class="panel" title="'+ data[i].name  +'" data-nav=""><ul class="list">';
+				var div = '<div id="mode'+ i +'" class="panel y-scroll mode-style" title="'+ data[i].name  +'" data-nav=""><ul class="list">';
 					div += '<li>温度 ：<span>'+ data[i].tmp +'</span></li>';
 					div += '<li>亮度 ：<span>'+ data[i].light +'</span></li>';
 					div += '<li>开关 ：<span>'+ open +'</span></li></ul>';
 					div += '<footer><a href="#" id="mode-choose-submit" class="icon check mini">选择此模式</a></footer>';
+				$('#modec').append(div);
 
 				console.log(data[i].name);
 			}

@@ -154,7 +154,7 @@
                     <p id='main_info'>Welcome.</p> -->
                     <ul class="list">
                         <li class='red'>
-                            <a href="#af" id='allmode' class='icon heart mini'>情景模式</a>
+                            <a href="#af" id='allmode' class='icon heart mini'  onclick="$.ui.showMask('载入中...')">情景模式</a>
                         </li>
                         <li class="blue">
                             <a href="#setting" class='icon settings mini'>设定</a>
@@ -225,7 +225,8 @@
                     </footer>
                 </div>
                 <!-- mode-0 -->
-                <div id="mode1" class="panel" title="查看" data-nav="">
+                <div id="modec">
+                <div id="mode0" class="panel" title="查看" data-nav="">
                     <ul class="list">
                         <li>当前模式 ：<span id="now-mode">--</span></li>
                         <li>当前温度 ：<span id="now-tmp">--</span>°c</li>
@@ -235,6 +236,7 @@
                     <footer>
                         <a href="#" id='mode-choose-submit' class='icon check mini'>选择此模式</a>
                     </footer>
+                </div>
                 </div>
                 <!-- Plugins -->
                 <div title="帮助" id="help" class="panel" data-header="testheader">
@@ -259,7 +261,7 @@
             <nav>
                 <ul class="list">
                     <li>
-                        <a href="#af" id="left-allmode" class='icon heart mini'>情景模式</a>
+                        <a href="#af" id="left-allmode" class='icon heart mini' onclick="$.ui.showMask('载入中...')">情景模式</a>
                     </li>
                     <li>
                         <a href="#setting" class='icon settings mini'>设定</a>
