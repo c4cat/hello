@@ -8,6 +8,7 @@ $(document).ready(function(){
 	function hide(){
         $.ui.hideMask();
     }
+  	var url = 'http://cornelia.com.cn/i/action.php?callback=?';
 
 	//--- submit setting ---//
 	$('#setting-submit').click(function(){
@@ -33,8 +34,8 @@ $(document).ready(function(){
 				return false;
 			}
 
-			$.getJSON('http://cornelia.com.cn/i/action.php?callback=?',{tmp:tmp,light:light,open:open,type:type},function(data){
-           	 		console.log(123);
+			$.getJSON(url,{tmp:tmp,light:light,open:open,type:type},function(data){
+           	 		console.log('fxxk!');
            	 		if(red==0){
            	 			$('#setting-form').append('<div class="input-group notice blue">成功!</div>');
            	 		}else{
@@ -43,11 +44,9 @@ $(document).ready(function(){
            	 			$.ui.hideMask();
     				}
     			);
-			
 	});
-	
 
-	//--- add mode ---//
+	//--- submit addmode ---//
 	$('#addmode-submit').click(function(){
 		//form check
 		var tmp = $('#addmode-tmp').val(),
@@ -72,17 +71,52 @@ $(document).ready(function(){
 				}
 				return false;
 			}
-			$.getJSON('http://cornelia.com.cn/i/action.php?callback=?',{tmp:tmp,light:light,open:open,type:type,name:name},function(data){
+			$.getJSON(url,{tmp:tmp,light:light,open:open,type:type,name:name},function(data){
            	 		// $('#afui_mask').find('h1').html('成功!');
            	 		if(red==0){
-           	 			$('#setting-form').append('<div class="input-group notice blue">成功!</div>');
+           	 			$('#addmode-form').append('<div class="input-group notice blue">成功!</div>');
            	 		}else{
-           	 			$('#setting-form').find('.red').addClass('blue').html('成功!!');
+           	 			$('#addmode-form').find('.red').addClass('blue').html('成功!!');
            	 		}
            	 		$.ui.hideMask();
     				}
     			);
 	});
+
+	//--- get data:check ---//
+	$('#get-check,#check-refresh').click(function() {
+		$.getJSON(url, {type:'getcheck'}, function(data) {
+			$.ui.hideMask();
+			console.log(data);
+			$('#now-mode').html(data.name);
+			$('#now-tmp').html(data.tmp);
+			$('#now-light').html(data.light);
+			if(data.open == 0){
+				open = '关';
+			}else{
+				open = '开';
+			}
+			$('#now-swi').html(open);
+		});
+	});
+	//--- get all of the mode ---//
+	$('#allmode').click(function() {
+		$.getJSON(url, {type:'getall'}, function(data) {
+			$.ui.hideMask();
+			console.log(data);
+			$('#now-mode').html(data.name);
+			$('#now-tmp').html(data.tmp);
+			$('#now-light').html(data.light);
+			if(data.open == 0){
+				open = '关';
+			}else{
+				open = '开';
+			}
+			$('#now-swi').html(open);
+		});
+	});	
+
+
 	//--- do the check ---//
 	$('.check-link').click(function(){
 		//$.ajax(){
@@ -97,6 +131,8 @@ $(document).ready(function(){
 	$('.settings').click(function() {
 		$('.notice').remove();
 	});
+
+
 
 });
 

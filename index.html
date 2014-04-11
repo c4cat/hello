@@ -154,22 +154,24 @@
                     <p id='main_info'>Welcome.</p> -->
                     <ul class="list">
                         <li class='red'>
-                            <a href="#af" id='aflink' class='icon heart mini'>情景模式</a>
+                            <a href="#af" id='allmode' class='icon heart mini'>情景模式</a>
                         </li>
                         <li class="blue">
                             <a href="#setting" class='icon settings mini'>设定</a>
                         </li>
                         <li class="blue">
-                            <a href="#check" class='icon magnifier check-link'>查询</a>
+                            <a href="#check" id='get-check' class='icon magnifier check-link'  onclick="$.ui.showMask('查询中...')">查询</a>
                         </li>
                     </ul>
                 </div>
                 <!-- af -->
                 <div title="情景模式" id="af" class="panel" data-vav="">
                     <ul class="list">
+
                         <li><a href="#mode1">模式1</a></li>
                         <li><a href="#mode2">模式2</a></li>
                         <li><a href="#mode3">模式3</a></li>
+
                     </ul>
                     <footer>
                         <a href="#addmode" id='navbar_home' class='icon add'>添加情景模式
@@ -198,13 +200,13 @@
                 <!-- setting -->
                 <div id="check" class="panel" title="查询" data-nav="">
                     <ul class="list">
-                        <li>当前模式 ：<span id="now-mode">默认</span></li>
-                        <li>当前温度 ：<span id="now-tmp">11</span>°c</li>
-                        <li>当前亮度 ：<span id="now-light">99</span></li>
-                        <li>当前开关 ：<span id="now-swi">开</span></li>
+                        <li>当前模式 ：<span id="now-mode"></span></li>
+                        <li>当前温度 ：<span id="now-tmp">0</span>°c</li>
+                        <li>当前亮度 ：<span id="now-light"></span></li>
+                        <li>当前开关 ：<span id="now-swi"></span></li>
                     </ul>
                     <footer>
-                        <a href="#" id='check-refresh' class='icon refresh mini'>刷新数据</a>
+                        <a href="#" id='check-refresh' class='icon refresh mini' onclick="$.ui.showMask('处理中...')">刷新数据</a>
                     </footer>
                 </div>
                 <!-- addmode -->
@@ -217,9 +219,9 @@
                     <label for="addmode-tmp">默认温度</label><input id="addmode-tmp" type="text" placeholder=" "onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     <label for="addmode-light">默认亮度</label><input  id="addmode-light" type="text" placeholder=" " onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     <label>开关状态</label>
-                    <input id="addmode-open" type="radio" name="addmode-swi" value="3"><label for="addmode-open">开</label>
-                    <input id="addmode-close" type="radio" name="addmode-swi" value="4"><label for="addmode-close">关</label>
-                    <br> 
+                    <input id="addmode-open" type="radio" name="addmode-swi" value="1"><label for="addmode-open">开</label>
+                    <input id="addmode-close" type="radio" name="addmode-swi" value="0"><label for="addmode-close">关</label>
+                    <br>
                 </div>
                 </form>
                     <footer>
@@ -229,10 +231,10 @@
                 <!-- mode-0 -->
                 <div id="mode1" class="panel" title="查看" data-nav="">
                     <ul class="list">
-                        <li>当前模式 ：<span id="now-mode">模式1</span></li>
-                        <li>当前温度 ：<span id="now-tmp">11</span>°c</li>
-                        <li>当前亮度 ：<span id="now-light">99</span></li>
-                        <li>当前开关 ：<span id="now-swi">开</span></li>
+                        <li>当前模式 ：<span id="now-mode">--</span></li>
+                        <li>当前温度 ：<span id="now-tmp">--</span>°c</li>
+                        <li>当前亮度 ：<span id="now-light">--</span></li>
+                        <li>当前开关 ：<span id="now-swi">--</span></li>
                     </ul>
                     <footer>
                         <a href="#" id='mode-choose-submit' class='icon check mini'>选择此模式</a>
@@ -267,7 +269,7 @@
                         <a href="#setting" class='icon settings mini'>设定</a>
                     </li>
                     <li>
-                        <a href="#check" class='icon magnifier mini check-link'>查询</a>
+                        <a href="#check" id='get-check' class='icon magnifier mini check-link'  onclick="$.ui.showMask('查询中...')">查询</a>
                     </li>
 
                 </ul>    
