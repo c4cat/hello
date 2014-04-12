@@ -196,10 +196,10 @@
                 <!-- setting -->
                 <div id="check" class="panel" title="查询" data-nav="">
                     <ul class="list">
-                        <li>当前模式 ：<span id="now-mode"></span></li>
-                        <li>当前温度 ：<span id="now-tmp">0</span>°c</li>
-                        <li>当前亮度 ：<span id="now-light"></span></li>
-                        <li>当前开关 ：<span id="now-swi"></span></li>
+                        <!-- <li>当前模式 ：<span id="now-mode"></span></li> -->
+                        <li>当前温度 ：<span id="now-tmp">-</span>°c</li>
+                        <li>当前亮度 ：<span id="now-light">-</span></li>
+                        <li>当前开关 ：<span id="now-swi">-</span></li>
                     </ul>
                     <footer>
                         <a href="#" id='check-refresh' class='icon refresh mini' onclick="$.ui.showMask('处理中...')">刷新数据</a>
@@ -226,15 +226,16 @@
                 </div>
                 <!-- mode-0 -->
                 <div id="modec">
-                <div id="mode0" class="panel" title="查看" data-nav="">
+                <div id="mode00" class="panel" title="查看" data-nav="">
                     <ul class="list">
                         <li>当前模式 ：<span id="now-mode">--</span></li>
                         <li>当前温度 ：<span id="now-tmp">--</span>°c</li>
                         <li>当前亮度 ：<span id="now-light">--</span></li>
                         <li>当前开关 ：<span id="now-swi">--</span></li>
+                        <li class="hidden-data">99,99,1</li>
                     </ul>
                     <footer>
-                        <a href="#" id='mode-choose-submit' class='icon check mini'>选择此模式</a>
+                        <a href="#" class='icon check mini mode-choose'>选择此模式</a>
                     </footer>
                 </div>
                 </div>

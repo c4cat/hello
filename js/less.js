@@ -113,30 +113,76 @@ $(document).ready(function(){
 				//2.body
     			if(data.open == 0){open = '关';}else{open = '开';}
 				var div = '<div id="mode'+ i +'" class="panel y-scroll mode-style" title="'+ data[i].name  +'" data-nav=""><ul class="list">';
+					div += '<li>模式 ：<span>'+ data[i].name +'</span></li>';
 					div += '<li>温度 ：<span>'+ data[i].tmp +'</span></li>';
 					div += '<li>亮度 ：<span>'+ data[i].light +'</span></li>';
-					div += '<li>开关 ：<span>'+ open +'</span></li></ul>';
-					div += '<footer><a href="#" id="mode-choose-submit" class="icon check mini">选择此模式</a></footer>';
+					div += '<li>开关 ：<span>'+ open +'</span></li>';
+					div += '<li class="hidden-data">'+ data[i].tmp + ',' + data[i].light + ',' + data[i].open +'</li></ul>';
+
+					div += '<footer><a href="#"  class="icon check mini mode-choose">选择此模式</a><a href="#" class="icon close mini mode-delete">删除此模式</a></footer>';
 				$('#modec').append(div);
 
-				console.log(data[i].name);
+
+				// console.log(data[i]);
 			}
 		});
 	});	
+	//chose mode
+		//delegate is the function like .live or .bind		
+	$(document).delegate('.mode-choose','click',function() {
+		var type ='choose',
+			real = $(this).parents().attr('data-parent')
+			data = $('#'+real).find('.hidden-data').html(),
+			this_ul =  $(this).parents().parents().find('.list'),
+			arr = data.split(','),
+			blue = this_ul.find('.notice.blue').length;
 
+
+			console.log(arr[0]);
+			console.log(data);
+
+			$.getJSON(url,{tmp:arr[0],light:arr[1],open:arr[2],type:type},function(data){
+           	 		if(blue==0){
+           	 			this_ul.append('<li class="notice blue">选择成功!</li>');
+           	 			}
+           	 		$.ui.hideMask();
+    				}
+    			);
+		});
+	//delete mode
+	$(document).delegate('.mode-delete','click',function() {
+		var type ='delete',
+			real = $(this).parents().attr('data-parent')
+			data = $('#'+real).find('.hidden-data').html(),
+			this_ul =  $(this).parents().parents().find('.list'),
+			arr = data.split(','),
+			blue = this_ul.find('.notice.blue').length;
+
+
+			console.log(arr[0]);
+			console.log(data);
+
+			$.getJSON(url,{tmp:arr[0],light:arr[1],open:arr[2],type:type},function(data){
+           	 		if(blue==0){
+           	 			this_ul.append('<li class="notice blue">选择成功!</li>');
+           	 			}
+           	 		$.ui.hideMask();
+    				}
+    			);
+		});
 
 	//--- do the check ---//
-	$('.check-link').click(function(){
-		//$.ajax(){
-			$('#now-mode').html('abc');
-			$('#now-tmp').html('abc');
-			$('#now-light').html();
-			$('#now-swi').html();
-		//}
-	});
+	// $('.check-link').click(function(){
+	// 	//$.ajax(){
+	// 		$('#now-mode').html('abc');
+	// 		$('#now-tmp').html('abc');
+	// 		$('#now-light').html();
+	// 		$('#now-swi').html();
+	// 	//}
+	// });
 
 	//---remove---
-	$('.settings').click(function() {
+	$('.settings,#af').click(function() {
 		$('.notice').remove();
 	});
 
