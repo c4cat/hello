@@ -8,14 +8,18 @@ $(document).ready(function(){
 	function hide(){
         $.ui.hideMask();
     }
-  	var url = 'http://cornelia.com.cn/i/action.php?callback=?';
+  	// var url = 'http://cornelia.com.cn/i/action.php?callback=?';
+  	// localhost
+  	var url = 'http://localhost/~mrc/cornelia/i/action.php?callback=?';
+
 
 	//--- submit setting ---//
 	$('#setting-submit').click(function(){
 		var tmp = $('#tmp').val(),
 			light = $('#light').val(),
 			open = $('input[name="swi"]:checked').val(),
-			type='update',
+			type = 'update',
+			name = 'default',
 			//red is the count of the error ,not more than one
 			red = $('#setting-form').find('.red').length,
 			blue = $('#setting-form').find('.blue').length;
@@ -34,7 +38,7 @@ $(document).ready(function(){
 				return false;
 			}
 
-			$.getJSON(url,{tmp:tmp,light:light,open:open,type:type},function(data){
+			$.getJSON(url,{tmp:tmp,light:light,open:open,type:type,name:name},function(data){
            	 		console.log('fxxk!');
            	 		if(red==0){
            	 			$('#setting-form').append('<div class="input-group notice blue">成功!</div>');
@@ -102,6 +106,7 @@ $(document).ready(function(){
 	//--- get all of the mode ---//
 	$('#allmode,left-allmode').click(function() {
 		$.getJSON(url, {type:'getall'}, function(data) {
+			remove_li_div();
 			$.ui.hideMask();
 			var i = 0;
 
@@ -112,18 +117,18 @@ $(document).ready(function(){
 				$('#modelist').append(li);
 				//2.body
     			if(data.open == 0){open = '关';}else{open = '开';}
-				var div = '<div id="mode'+ i +'" class="panel y-scroll mode-style" title="'+ data[i].name  +'" data-nav=""><ul class="list">';
-					div += '<li>模式 ：<span>'+ data[i].name +'</span></li>';
+				var div = '<div id="mode'+ i +'" data-id="'+ data[i].id +'" class="panel y-scroll mode-style" title="'+ data[i].name  +'" data-nav=""><ul class="list">';
+					div += '<li>模式 ：<span class="list-name">'+ data[i].name +'</span></li>';
 					div += '<li>温度 ：<span>'+ data[i].tmp +'</span></li>';
 					div += '<li>亮度 ：<span>'+ data[i].light +'</span></li>';
 					div += '<li>开关 ：<span>'+ open +'</span></li>';
 					div += '<li class="hidden-data">'+ data[i].tmp + ',' + data[i].light + ',' + data[i].open +'</li></ul>';
 
-					div += '<footer><a href="#"  class="icon check mini mode-choose">选择此模式</a><a href="#" class="icon close mini mode-delete">删除此模式</a></footer>';
+					div += '<footer><a href="#"  class="icon check mini mode-choose" onclick="$.ui.showMask(\'处理中...\')">选择此模式</a><a href="#" class="icon close mini mode-delete" onclick="$.ui.showMask(\'处理中...\')">删除此模式</a></footer>';
 				$('#modec').append(div);
 
 
-				// console.log(data[i]);
+				console.log(data[i]);
 			}
 		});
 	});	
@@ -131,17 +136,18 @@ $(document).ready(function(){
 		//delegate is the function like .live or .bind		
 	$(document).delegate('.mode-choose','click',function() {
 		var type ='choose',
-			real = $(this).parents().attr('data-parent')
+			real = $(this).parents().attr('data-parent'),
 			data = $('#'+real).find('.hidden-data').html(),
 			this_ul =  $(this).parents().parents().find('.list'),
 			arr = data.split(','),
+			// idd = $('#'+real).attr('data-id'),
+			this_ul =  $('#'+real).find('.list'),
+			this_name =  $('#'+real).find('.list-name').html(),
 			blue = this_ul.find('.notice.blue').length;
+			console.log(arr);
 
-
-			console.log(arr[0]);
-			console.log(data);
-
-			$.getJSON(url,{tmp:arr[0],light:arr[1],open:arr[2],type:type},function(data){
+			$.getJSON(url,{tmp:arr[0],light:arr[1],open:arr[2],type:type,type:type,name:this_name},function(data){
+					console.log('done');
            	 		if(blue==0){
            	 			this_ul.append('<li class="notice blue">选择成功!</li>');
            	 			}
@@ -152,40 +158,60 @@ $(document).ready(function(){
 	//delete mode
 	$(document).delegate('.mode-delete','click',function() {
 		var type ='delete',
-			real = $(this).parents().attr('data-parent')
-			data = $('#'+real).find('.hidden-data').html(),
+			real = $(this).parents().attr('data-parent'),
+			idd = $('#'+real).attr('data-id'),
+			// arr[1] is the id of the mode
+
 			this_ul =  $(this).parents().parents().find('.list'),
-			arr = data.split(','),
 			blue = this_ul.find('.notice.blue').length;
 
+			console.log(idd);
 
-			console.log(arr[0]);
-			console.log(data);
-
-			$.getJSON(url,{tmp:arr[0],light:arr[1],open:arr[2],type:type},function(data){
-           	 		if(blue==0){
-           	 			this_ul.append('<li class="notice blue">选择成功!</li>');
-           	 			}
+			$.getJSON(url,{idd:idd,type:type},function(data){
            	 		$.ui.hideMask();
+           	 		//remove
+           	 		remove_li_div();
+           	 		//output li & div
+					output_modelist(data);
+					$.ui.goBack();
+					console.log('delete');
     				}
     			);
 		});
 
-	//--- do the check ---//
-	// $('.check-link').click(function(){
-	// 	//$.ajax(){
-	// 		$('#now-mode').html('abc');
-	// 		$('#now-tmp').html('abc');
-	// 		$('#now-light').html();
-	// 		$('#now-swi').html();
-	// 	//}
-	// });
 
 	//---remove---
 	$('.settings,#af').click(function() {
 		$('.notice').remove();
 	});
 
+	function output_modelist(data){
+           	 var i = 0;
+			//pring json data -> html
+			for(i;i<data.length;i++){
+				//1.modelist
+				var li = '<li><a href="#mode'+i+'">'+data[i].name+'</a></li>';
+				$('#modelist').append(li);
+				//2.body
+    			if(data.open == 0){open = '关';}else{open = '开';}
+				var div = '<div id="mode'+ i +'" data-id="'+ data[i].id +'" class="panel y-scroll mode-style" title="'+ data[i].name  +'" data-nav=""><ul class="list">';
+					div += '<li>模式 ：<span>'+ data[i].name +'</span></li>';
+					div += '<li>温度 ：<span>'+ data[i].tmp +'</span></li>';
+					div += '<li>亮度 ：<span>'+ data[i].light +'</span></li>';
+					div += '<li>开关 ：<span>'+ open +'</span></li>';
+					div += '<li class="hidden-data">'+ data[i].tmp + ',' + data[i].light + ',' + data[i].open +'</li></ul>';
+
+					div += '<footer><a href="#"  class="icon check mini mode-choose" onclick="$.ui.showMask(\'处理中...\')">选择此模式</a><a href="#" class="icon close mini mode-delete" onclick="$.ui.showMask(\'处理中...\')">删除此模式</a></footer>';
+				$('#modec').append(div);
+				
+				// console.log('doooooo');
+			}
+	}
+
+	function remove_li_div(){
+		$('#modelist').children().filter('li').remove();
+        $('#modec').children().filter('div').remove();
+	}
 
 
 });
