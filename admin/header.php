@@ -10,7 +10,7 @@ session_start();
   <link rel="stylesheet" href="css/style2.css">
   <style type="text/css">
   body,td,th {
-	font-family: "Open Sans", sans-serif;
+	/*font-family: "Open Sans", sans-serif;*/
 }
   </style>
   <script src="js/prefixfree.min.js"></script>
@@ -22,19 +22,19 @@ session_start();
   <div class="container app">
   <aside class="sidebar">
     <h1 class="logo">
-      <a href="#">后台</a>
+      <a href="../admin">&nbsp;</a>
     </h1>
     <nav class="main-nav">
       <ul>
-        <li><a href="setting.php">设置</a></li>
+        <li><a href="setting.php">设定</a></li>
         <li class="active">
           <ul>
             <li class="<?php if($type=="modelist"){echo("active");} ?>"><a href="modelist.php?page=0">模式管理</a></li>
             <li class='<?php if($type=="add"){echo("active");} ?>'><a href="add.php">添加模式</a></li>
-            <li class='<?php if($type=="p_add"){echo("active");} ?>'><a href="add_period.php">查询</span></a></li>
+            <li class='<?php if($type=="check"){echo("active");} ?>'><a href="check.php">查询</span></a></li>
           </ul>
         </li>
-        <li><a href="#">简单说明</a></li>
+        <li><a href="intro.php">简单说明</a></li>
         <!-- <li><a href="#">Stats</a></li> -->
       </ul>
     </nav>

@@ -1,15 +1,17 @@
 /*cornelia*/
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);*/
 
 * {
 	box-sizing: border-box;
 }
 
 body {
-	font-family: 'Open Sans', sans-serif;
+	font-family: arial ,'Open Sans', sans-serif;
 	margin: 0;
 }
-
+form p{
+	line-height: 2;
+}
 .clr {
 	clear: both;
 }
@@ -82,7 +84,7 @@ a {
 	padding: 20px 30px;
 	display: block;
 	color: #999;
-	font-weight: 700;
+	/*font-weight: 700;*/
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -443,9 +445,10 @@ a {
 
 .del {
 	height: 25px;
-	padding: 0px 10px 3px 10px;
+	padding: 5px 10px;
 	position: relative;
 	top: 3px;
+	font-size: 12px;
 	margin-right: 15px;
 }/**/section.message {
 	display: none!important;
@@ -548,4 +551,10 @@ h3 {
 
 .red {
 	color: red;
+}
+.logo a{
+	width: 100%;
+	height: 100%;
+	display: block;
+	cursor: pointer;
 }

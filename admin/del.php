@@ -1,6 +1,6 @@
 <?php
 require("session_inside.php");
-require("../conn.php");
+require("conn.php");
 $conn=mysql_open();
 $id=$_GET['id'];
 

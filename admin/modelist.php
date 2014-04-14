@@ -9,8 +9,8 @@ function suredo(src,q) {var ret; ret = confirm(q); if(ret!=false)window.location
         <h1>模式管理<span class="icon icon-arrow-down"></span></h1>
         <ul class="message-list">
         <?php
-          require("../conn.php");
-          require("../page.php");
+          require("conn.php");
+          require("page.php");
           $conn=mysql_open();
 
           $query="select  * from demo order by id asc";
@@ -20,7 +20,9 @@ function suredo(src,q) {var ret; ret = confirm(q); if(ret!=false)window.location
           while($rs=mysql_fetch_object($result)){
               echo '<li>';
               ?>
-            <a href="javascript:suredo('del.php?id=<?php echo($rs->id);?>','确定删除这个题目?')"><span class="btn btn-primary del">x</span></a>
+            <a href="javascript:suredo('del.php?id=<?php echo($rs->id);?>','确定删除这个模式?')"><span class="btn btn-primary del">删除</span></a>
+            <a href="javascript:suredo('choose.php?id=<?php echo($rs->id);?>','确定选择这个模式?')"><span class="btn btn-primary del">选择</span></a>
+
             <!-- <a href='javascript:suredo("del.php?id=<?php //echo "$rs->id";?>&type=choice","确定删除?")'>删除</a></span>  -->
             <div class="preview">
               <p><?php echo($rs->name); ?></p>
