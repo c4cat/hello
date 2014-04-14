@@ -40,7 +40,7 @@ if(isset($_SESSION['admin_user'])){
                 <p><input type="submit" value="登陆" name=dosubmit></p>
             </fieldset>
         </form>
-        <p>迷路了? <a href="../">返回首页</a><span class="fontawesome-arrow-right"></span></p>
+        <!-- <p>迷路了? <a href="../">返回首页</a><span class="fontawesome-arrow-right"></span></p> -->
     </div> <!-- end login -->
 </body>
 </html>

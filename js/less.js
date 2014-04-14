@@ -10,7 +10,8 @@ $(document).ready(function(){
     }
   	// var url = 'http://cornelia.com.cn/i/action.php?callback=?';
   	// localhost
-  	var url = 'http://localhost/~mrc/cornelia/i/action.php?callback=?';
+  	// var url = 'http://localhost/~mrc/cornelia/i/action.php?callback=?';
+  	var url = 'http://localhost/~mrc/hello/hello/www/admin/action.php?callback=?';
 
 
 	//--- submit setting ---//
@@ -77,9 +78,10 @@ $(document).ready(function(){
 			}
 			$.getJSON(url,{tmp:tmp,light:light,open:open,type:type,name:name},function(data){
            	 		// $('#afui_mask').find('h1').html('成功!');
-           	 		if(red==0){
+           	 		if(blue==0){
            	 			$('#addmode-form').append('<div class="input-group notice blue">成功!</div>');
            	 		}else{
+           	 			$('#addmode-form').find('.blue').remove();
            	 			$('#addmode-form').find('.red').addClass('blue').html('成功!!');
            	 		}
            	 		$.ui.hideMask();
@@ -164,8 +166,10 @@ $(document).ready(function(){
 
 			this_ul =  $(this).parents().parents().find('.list'),
 			blue = this_ul.find('.notice.blue').length;
-
-			console.log(idd);
+			//	remove footer
+			// 2014年04月15日00:54:57
+			$(this).parent().remove();
+			console.log($(this).parent());
 
 			$.getJSON(url,{idd:idd,type:type},function(data){
            	 		$.ui.hideMask();
@@ -173,7 +177,8 @@ $(document).ready(function(){
            	 		remove_li_div();
            	 		//output li & div
 					output_modelist(data);
-					$.ui.goBack();
+					// $.ui.goBack();
+					window.location.href = 'index.html#af';
 					console.log('delete');
     				}
     			);

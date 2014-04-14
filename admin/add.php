@@ -6,7 +6,7 @@
       <div class="messages">
         <h1>添加模式<span class="icon icon-arrow-down"></span></h1>
         <ul class="message-list">
-            <form id="form1" name="form1" method="post" action="post2mysql.php" onsubmit="return form1_onsubmit()">
+            <form id="form1" name="form1" method="post" action="post2mysql.php?action=add" onsubmit="return form1_onsubmit()">
                 <p class="inp"><label for="addmode-name">模式名称</label><input id="addmode-name" name="addmode-name" type="text" placeholder=" " class="form-control"></p>
                 <p class="inp"><label for="addmode-tmp">默认温度</label><input id="addmode-tmp" name="addmode-tmp" type="text" placeholder=" " class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"></p>
                 <p class="inp"><label for="addmode-light">默认亮度</label><input id="addmode-light" name="addmode-light" type="text" placeholder=" " class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
