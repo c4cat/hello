@@ -11,7 +11,9 @@ $(document).ready(function(){
   	// var url = 'http://cornelia.com.cn/i/action.php?callback=?';
   	// localhost
   	// var url = 'http://localhost/~mrc/cornelia/i/action.php?callback=?';
-  	var url = 'http://localhost/~mrc/hello/hello/www/admin/action.php?callback=?';
+  	// var url = 'http://localhost/~mrc/hello/hello/www/admin/action.php?callback=?';
+  	var url = 'http://cornelia.com.cn/admin/action.php?callback=?';
+  	
 
 
 	//--- submit setting ---//
