@@ -125,7 +125,7 @@ $(document).ready(function(){
 					div += '<li>模式 ：<span class="list-name">'+ data[i].name +'</span></li>';
 					div += '<li>温度 ：<span>'+ data[i].tmp +'</span></li>';
 					div += '<li>亮度 ：<span>'+ data[i].light +'</span></li>';
-					div += '<li>开关 ：<span>'+ open +'</span></li>';
+					div += '<li>窗帘开关 ：<span>'+ open +'</span></li>';
 					div += '<li class="hidden-data">'+ data[i].tmp + ',' + data[i].light + ',' + data[i].open +'</li></ul>';
 
 					div += '<footer><a href="#"  class="icon check mini mode-choose" onclick="$.ui.showMask(\'处理中...\')">选择此模式</a><a href="#" class="icon close mini mode-delete" onclick="$.ui.showMask(\'处理中...\')">删除此模式</a></footer>';
@@ -205,7 +205,7 @@ $(document).ready(function(){
 					div += '<li>模式 ：<span>'+ data[i].name +'</span></li>';
 					div += '<li>温度 ：<span>'+ data[i].tmp +'</span></li>';
 					div += '<li>亮度 ：<span>'+ data[i].light +'</span></li>';
-					div += '<li>开关 ：<span>'+ open +'</span></li>';
+					div += '<li>窗帘开关 ：<span>'+ open +'</span></li>';
 					div += '<li class="hidden-data">'+ data[i].tmp + ',' + data[i].light + ',' + data[i].open +'</li></ul>';
 
 					div += '<footer><a href="#"  class="icon check mini mode-choose" onclick="$.ui.showMask(\'处理中...\')">选择此模式</a><a href="#" class="icon close mini mode-delete" onclick="$.ui.showMask(\'处理中...\')">删除此模式</a></footer>';

@@ -10,11 +10,11 @@
                 <p class="inp"><label for="addmode-name">模式名称</label><input id="addmode-name" name="addmode-name" type="text" placeholder=" " class="form-control"></p>
                 <p class="inp"><label for="addmode-tmp">默认温度</label><input id="addmode-tmp" name="addmode-tmp" type="text" placeholder=" " class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"></p>
                 <p class="inp"><label for="addmode-light">默认亮度</label><input id="addmode-light" name="addmode-light" type="text" placeholder=" " class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-                <p class="inp"><label>开关状态</label></p>
+                <p class="inp"><label>窗帘开关</label></p>
                 <input id="addmode-open" type="radio" name="addmode-swi" value="1" checked='checked'><label for="addmode-open">开</label>
                 <input id="addmode-close" type="radio" name="addmode-swi" value="0"><label for="addmode-close">关</label>
                 </p>
-                <p><input type="submit" name="Submit" class="btn btn-primary q_submit" value="添加试题"/></p>
+                <p><input type="submit" name="Submit" class="btn btn-primary q_submit" value="添加"/></p>
             </form>
           </li>
         </ul>
