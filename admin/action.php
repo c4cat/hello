@@ -28,7 +28,7 @@ $callback = $_GET['callback'].'('.json_encode($_GET['type']).')';
 
 // --- --- ///
 if($type == '"update"'){
-	$sql = 'update current set date="'.$addtime.'",tmp="'.$tmp.'",light="'.$light.'",open="'.$open.'" where id = "1"';
+	$sql = 'update current set date="'.$addtime.'",tmp="'.$tmp.'",light="'.$light.'",open="'.$open.'",name="'.$name'" where id = "1"';
 	$result=mysql_query($sql);
 	echo($callback);
 }elseif($type == '"addmode"'){
