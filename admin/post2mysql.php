@@ -7,7 +7,7 @@ $conn=mysql_open();
 $type = $_GET['action'];
 
 if($type == 'add'){
-	$bcurl='add.php';
+	$bcurl='modelist.php?page=0';
 	$sql="insert into demo(name,tmp,light,open,date) values('".$_POST["addmode-name"]."','".$_POST["addmode-tmp"]."','".$_POST["addmode-light"]."','".$_POST["addmode-swi"]."','".$addtime."')";
 }elseif ($type == 'update') {
 	$bcurl='check.php';

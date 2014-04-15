@@ -175,7 +175,7 @@ a {
 .main .header .nav-settings {
 	float: right;
 	line-height: 80px;
-	border-left: 1px solid #d44179;
+	border-left: 2px solid #d44179;
 }
 
 .main .header .nav-settings li {
