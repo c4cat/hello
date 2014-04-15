@@ -11,8 +11,8 @@ $(document).ready(function(){
   	// var url = 'http://cornelia.com.cn/i/action.php?callback=?';
   	// localhost
   	// var url = 'http://localhost/~mrc/cornelia/i/action.php?callback=?';
-  	var url = 'http://localhost/~mrc/hello/hello/www/admin/action.php?callback=?';
-  	// var url = 'http://cornelia.com.cn/admin/action.php?callback=?';
+  	// var url = 'http://localhost/~mrc/hello/hello/www/admin/action.php?callback=?';
+  	var url = 'http://cornelia.com.cn/admin/action.php?callback=?';
   	
 
 
@@ -22,7 +22,7 @@ $(document).ready(function(){
 			light = $('#light').val(),
 			open = $('input[name="swi"]:checked').val(),
 			type = 'update',
-			name = '默认',
+			name = 'xx',
 			//red is the count of the error ,not more than one
 			red = $('#setting-form').find('.red').length,
 			blue = $('#setting-form').find('.blue').length;
@@ -96,7 +96,11 @@ $(document).ready(function(){
 		$.getJSON(url, {type:'getcheck'}, function(data) {
 			$.ui.hideMask();
 			console.log(data);
-			$('#now-mode').html(data.name);
+			if(data.name == 'xx'){
+				$('#now-mode').html('默认');
+			}else{
+				$('#now-mode').html(data.name);
+			}
 			$('#now-tmp').html(data.tmp);
 			$('#now-light').html(data.light);
 			if(data.open == 0){
