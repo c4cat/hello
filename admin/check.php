@@ -19,7 +19,7 @@ function suredo(src,q) {var ret; ret = confirm(q); if(ret!=false)window.location
           while($rs=mysql_fetch_object($result)){
               // echo '<li>';
               ?>
-              <li><p>当前模式 : <?php echo($rs->name); ?></p></li>
+              <li><p>当前模式 : <?php if($rs->name == 'xx'){echo('默认');}else{echo($rs->name);} ?></p></li>
               <li><p>当前温度 : <?php echo($rs->tmp); ?></p></li>
               <li><p>当前亮度 : <?php echo($rs->light); ?></p></li>
               <li><p>窗帘开关 : <?php if($rs->open==0){echo('关');}else{echo('开');}; ?></p></li>

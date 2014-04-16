@@ -14,8 +14,6 @@ $(document).ready(function(){
   	// var url = 'http://localhost/~mrc/hello/hello/www/admin/action.php?callback=?';
   	var url = 'http://cornelia.com.cn/admin/action.php?callback=?';
   	
-
-
 	//--- submit setting ---//
 	$('#setting-submit').click(function(){
 		var tmp = $('#tmp').val(),
@@ -164,18 +162,17 @@ $(document).ready(function(){
     			);
 		});
 	//delete mode
-	$(document).delegate('.mode-delete','click',function() {
-		var type ='delete',
-			real = $(this).parents().attr('data-parent'),
-			idd = $('#'+real).attr('data-id'),
+	$(document).delegate('.mode-delete','click',function() {//由于mode-delete是动态创建的,所以要使用delegate绑定时间
+		var type ='delete', //定义类型
+			real = $(this).parents().attr('data-parent'), //获取父类的data-parent属性
+			idd = $('#'+real).attr('data-id'),//根据data-parent属性获取当前模式的id
 			// arr[1] is the id of the mode
 
-			this_ul =  $(this).parents().parents().find('.list'),
-			blue = this_ul.find('.notice.blue').length;
+			this_ul =  $(this).parents().parents().find('.list'), //获取指针内的ul.list
+			blue = this_ul.find('.notice.blue').length; //获取成功提示的个数
 			//	remove footer
-			// 2014年04月15日00:54:57
-			$(this).parent().remove();
-			console.log($(this).parent());
+			// 2014年04月13日02:54:57
+			$(this).parent().remove(); //移除内容
 
 			$.getJSON(url,{idd:idd,type:type},function(data){
            	 		$.ui.hideMask();

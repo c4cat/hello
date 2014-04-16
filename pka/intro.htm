@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>代码解释</title>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="garden.css" media="all">
+<link rel="stylesheet" href="print.css" media="print">
+<!--[if lt IE 9]>
+<script src="javascript/html5.js"></script>
+<![endif]-->
+<style type="text/css">
+</style>
+<style>
+</style>
+</head>
+<body onload="prettyPrint()">
+
+<section id="intro">
+	<!-- Introduction-->
+	<header id="intro.intro"><h1>代码解释</h1></header>
+	<!-- Articles-->
+	<article id="intro.authors">
+		<h2>简介</h2>
+		<div>
+			<p>
+			安卓程序使用<a href="http://www.phonegap.com/"> PhoneGap </a>框架 <br>
+			后台管理使用 PHP + MySQL
+			</p>
+		</div>
+	</article>
+</section>
+
+<section>
+	<h2>安卓关键代码</h2>
+<article>
+	<div>
+	<h3>设定</h3>	
+	<p>点击<提交>提交设置</p>
+	<pre class="prettyprint">
+		<code>
+	$('#setting-submit').click(function(){ //点击事件
+		var tmp = $('#tmp').val(), //获取填写的温度
+			light = $('#light').val(), //获取填写的亮度
+			open = $('input[name="swi"]:checked').val(), //获取选择的开光状态
+			type = 'update', //事件的类型
+			name = 'default', //模式的名字
+			//red is the count of the error ,not more than one
+			red = $('#setting-form').find('.red').length, //出错提示,如内容为空
+			blue = $('#setting-form').find('.blue').length; //成功提示
+
+			//form check
+			//如果填写的内容中有一项为空,则报错,返回
+			if(tmp=='' || light=='' || open==''){
+				if(red==0){ //如果不存在报错信息,则在底部加一个
+					$('#setting-form').append('&lt;div class="input-group notice red"&gt;每一项都必须填写!&lt;/div&gt;');
+				}else{ //如果存在
+					if(blue==1){//且存在成功信息框,修改成功信息框的样式和内容
+						$('#setting-form').find('.blue').removeClass('blue').html('每一项都必须填写!!');
+					}
+				}
+				return false; //返回
+			}
+			//ajax跨域
+			$.getJSON(url,{tmp:tmp,light:light,open:open,type:type,name:name},function(data){ 
+			//funciton是成功后返回的函数
+           	 		if(red==0){//如果不存在报错信息,则在底部加一个成功信息
+           	 			$('#setting-form').append('&lt;div class="input-group notice blue"&gt;成功!&lt;/div&gt;');
+           	 		}else{//且存在成功信息框,修改错误信息框的样式和内容
+           	 			$('#setting-form').find('.red').addClass('blue').html('成功!!');
+           	 		}
+           	 			$.ui.hideMask(); //把加载框隐藏
+    				}
+    			);
+	});
+   		</code>
+	</pre>
+	</div>
+</article>
+<article>
+	<div>
+	<h3>查询</h3>	
+	<p>点击<查询>获取数据</p>
+	<pre class="prettyprint">
+		<code>
+	$('#get-check,#check-refresh,#left-get-check').click(function() {//点击事件
+		$.getJSON(url, {type:'getcheck'}, function(data) { //ajax跨域读取data数据
+			$.ui.hideMask(); //把加载框隐藏
+			if(data.name == 'default'){ //如果是default模式,显示中文'默认'
+				$('#now-mode').html('默认'); 
+			}else{//否则直接显示模式名字
+				$('#now-mode').html(data.name);
+			}
+			$('#now-tmp').html(data.tmp); //温度值
+			$('#now-light').html(data.light); //亮度值
+			if(data.open == 0){ //开关状态判断,0为关,1为开
+				open = '关';
+			}else{
+				open = '开';
+			}
+			$('#now-swi').html(open); //开关状态
+		});
+	});
+   		</code>
+	</pre>
+	</div>
+</article>
+<article>
+	<div>
+	<h3>情景模式</h3>	
+	<p>点击<情景模式>获取所有情景模式</p>
+	<pre class="prettyprint">
+		<code>
+	$('#allmode,left-allmode').click(function() { //点击事件
+		$.getJSON(url, {type:'getall'}, function(data) { //ajax跨域读取data数据
+			remove_li_div(); // 后面会说,去除某些内容,防止刷新的时候出现重复的内容
+			$.ui.hideMask(); //把加载框隐藏
+			
+			var i = 0; //记录输出数
+
+			//pring json data -> html
+			for(i;i&lt;data.length;i++){ //循环输出内容
+				//1.modelist
+				//输出模式列表
+				var li = '&lt;li&gt;&lt;a href="#mode'+i+'"&gt;'+data[i].name+'&lt;/a&gt;&lt;/li&gt;';//定义li的内容格式
+				$('#modelist').append(li);//添加在#modelist后面
+				//2.body
+				//输出模式内容
+    			if(data.open == 0){open = '关';}else{open = '开';} //判断开关状态
+    			//定义div的内容格式
+				var div = '&lt;div id="mode'+ i +'" data-id="'+ data[i].id +'" class="panel y-scroll mode-style"
+				 title="'+ data[i].name  +'" data-nav=""&gt;&lt;ul class="list"&gt;';
+					div += '&lt;li&gt;模式 ：&lt;span class="list-name"&gt;'+ data[i].name +'&lt;/span&gt;&lt;/li&gt;';
+					div += '&lt;li&gt;温度 ：&lt;span&gt;'+ data[i].tmp +'&lt;/span&gt;&lt;/li&gt;';
+					div += '&lt;li&gt;亮度 ：&lt;span&gt;'+ data[i].light +'&lt;/span&gt;&lt;/li&gt;';
+					div += '&lt;li&gt;窗帘开关 ：&lt;span&gt;'+ open +'&lt;/span&gt;&lt;/li&gt;';
+					div += '&lt;li class="hidden-data"&gt;'+ data[i].tmp + ',' + data[i].light + ','
+					 + data[i].open +'&lt;/li&gt;&lt;/ul&gt;';
+
+					div += '&lt;footer&gt;&lt;a href="#"  
+					class="icon check mini mode-choose" onclick="$.ui.showMask(\'处理中...\')"&gt;
+					选择此模式&lt;/a&gt;&lt;a href="#" class="icon 
+					close mini mode-delete" onclick="$.ui.showMask(\'处理中...\')"&gt;删除此模式&lt;/a&gt;&lt;/footer&gt;';
+
+				$('#modec').append(div);//添加在#modec后面
+			}
+		});
+	});	
+   		</code>
+	</pre>
+	</div>
+</article>
+<article>
+	<div>
+	<h3>删除模式</h3>	
+	<p>点击<删除模式>删除此情景模式</p>
+	<pre class="prettyprint">
+		<code>
+	$(document).delegate('.mode-delete','click',function() {//由于mode-delete是动态创建的,所以要使用delegate绑定事件
+		var type ='delete', //定义类型
+			real = $(this).parents().attr('data-parent'), //获取父类的data-parent属性
+			idd = $('#'+real).attr('data-id'),//根据data-parent属性获取当前模式的id
+			// arr[1] is the id of the mode
+
+			this_ul =  $(this).parents().parents().find('.list'), //获取指针内的ul.list
+			blue = this_ul.find('.notice.blue').length; //获取成功提示的个数
+			//	remove footer
+			// 2014年04月13日02:54:57
+			$(this).parent().remove(); //移除内容
+
+			$.getJSON(url,{idd:idd,type:type},function(data){//ajax请求成功后
+           	 		$.ui.hideMask(); //隐藏
+           	 		//remove
+           	 		remove_li_div(); //删除li和div
+					output_modelist(data); //输出modelist
+					window.location.href = 'index.html#af';//删除成功后跳转
+    				}
+    			);
+		});
+   		</code>
+	</pre>
+	</div>
+</article>
+<article>
+	<div>
+	<h3>选择模式</h3>	
+	<p>点击<选择模式>选择此情景模式</p>
+	<pre class="prettyprint">
+		<code>
+	$(document).delegate('.mode-choose','click',function() {//由于mode-delete是动态创建的,所以要使用delegate绑定事件
+		var type ='choose', //定义类型
+			real = $(this).parents().attr('data-parent'), //获取父类的data-parent属性
+			data = $('#'+real).find('.hidden-data').html(), //获取内容
+			arr = data.split(','), //将内容转换成数组
+			this_ul =  $('#'+real).find('.list'),//获取指针内的ul.list
+			this_name =  $('#'+real).find('.list-name').html(), //设置名字
+			blue = this_ul.find('.notice.blue').length; //成功信息的条数
+
+			$.getJSON(url,{tmp:arr[0],light:arr[1],open:arr[2],type:type,type:type,name:this_name},
+			function(data){//url处理数据
+           	 		if(blue==0){ //如果不存在成功信息,则添加一个
+           	 			this_ul.append('&lt;li class="notice blue"&gt;选择成功!&lt;/li&gt;');
+           	 			}
+           	 		$.ui.hideMask(); //隐藏
+    				}
+    			);
+		});
+   		</code>
+	</pre>
+	</div>
+</article>
+</section>
+
+<!-- Footer-->
+<footer>
+<p>
+	Copyright © 2011. Built with
+	<a href="http://nodejs.org/">Node.js </a>using a<a href="https://github.com/visionmedia/jade/">jade </a>template. 
+Hosted by 
+	<a href="http://cramerdev.com/">Cramer Development</a>.
+</p>
+</footer>
+<script src="jquery.min.js"></script>
+<script src="prettify.js"></script>
+</body>
+</html>
