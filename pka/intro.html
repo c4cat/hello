@@ -6,8 +6,8 @@
 <meta charset="utf-8">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="garden.css" media="all">
-<link rel="stylesheet" href="print.css" media="print">
+<link rel="stylesheet" href="http://cornelia.com.cn/public/garden.css" media="all">
+<link rel="stylesheet" href="http://cornelia.com.cn/public/print.css" media="print">
 <!--[if lt IE 9]>
 <script src="javascript/html5.js"></script>
 <![endif]-->
@@ -55,10 +55,10 @@
 			//如果填写的内容中有一项为空,则报错,返回
 			if(tmp=='' || light=='' || open==''){
 				if(red==0){ //如果不存在报错信息,则在底部加一个
-					$('#setting-form').append('&lt;div class="input-group notice red"&gt;每一项都必须填写!&lt;/div&gt;');
+				$('#setting-form').append('&lt;div class="input-group notice red"&gt;每一项都必须填写!&lt;/div&gt;');
 				}else{ //如果存在
 					if(blue==1){//且存在成功信息框,修改成功信息框的样式和内容
-						$('#setting-form').find('.blue').removeClass('blue').html('每一项都必须填写!!');
+				$('#setting-form').find('.blue').removeClass('blue').html('每一项都必须填写!!');
 					}
 				}
 				return false; //返回
@@ -124,13 +124,15 @@
 			for(i;i&lt;data.length;i++){ //循环输出内容
 				//1.modelist
 				//输出模式列表
-				var li = '&lt;li&gt;&lt;a href="#mode'+i+'"&gt;'+data[i].name+'&lt;/a&gt;&lt;/li&gt;';//定义li的内容格式
+				var li = '&lt;li&gt;&lt;a href="#mode'+i+'"&gt;
+				'+data[i].name+'&lt;/a&gt;&lt;/li&gt;';//定义li的内容格式
 				$('#modelist').append(li);//添加在#modelist后面
 				//2.body
 				//输出模式内容
     			if(data.open == 0){open = '关';}else{open = '开';} //判断开关状态
     			//定义div的内容格式
-				var div = '&lt;div id="mode'+ i +'" data-id="'+ data[i].id +'" class="panel y-scroll mode-style"
+				var div = '&lt;div id="mode'+ i +'" 
+				data-id="'+ data[i].id +'" class="panel y-scroll mode-style"
 				 title="'+ data[i].name  +'" data-nav=""&gt;&lt;ul class="list"&gt;';
 					div += '&lt;li&gt;模式 ：&lt;span class="list-name"&gt;'+ data[i].name +'&lt;/span&gt;&lt;/li&gt;';
 					div += '&lt;li&gt;温度 ：&lt;span&gt;'+ data[i].tmp +'&lt;/span&gt;&lt;/li&gt;';
@@ -142,7 +144,8 @@
 					div += '&lt;footer&gt;&lt;a href="#"  
 					class="icon check mini mode-choose" onclick="$.ui.showMask(\'处理中...\')"&gt;
 					选择此模式&lt;/a&gt;&lt;a href="#" class="icon 
-					close mini mode-delete" onclick="$.ui.showMask(\'处理中...\')"&gt;删除此模式&lt;/a&gt;&lt;/footer&gt;';
+					close mini mode-delete" onclick="$.ui.showMask(\'处理中...\')"
+					&gt;删除此模式&lt;/a&gt;&lt;/footer&gt;';
 
 				$('#modec').append(div);//添加在#modec后面
 			}
@@ -158,7 +161,8 @@
 	<p>点击<删除模式>删除此情景模式</p>
 	<pre class="prettyprint">
 		<code>
-	$(document).delegate('.mode-delete','click',function() {//由于mode-delete是动态创建的,所以要使用delegate绑定事件
+	$(document).delegate('.mode-delete','click',function() {
+	//由于mode-delete是动态创建的,所以要使用delegate绑定事件
 		var type ='delete', //定义类型
 			real = $(this).parents().attr('data-parent'), //获取父类的data-parent属性
 			idd = $('#'+real).attr('data-id'),//根据data-parent属性获取当前模式的id
@@ -189,7 +193,8 @@
 	<p>点击<选择模式>选择此情景模式</p>
 	<pre class="prettyprint">
 		<code>
-	$(document).delegate('.mode-choose','click',function() {//由于mode-delete是动态创建的,所以要使用delegate绑定事件
+	$(document).delegate('.mode-choose','click',function() {
+	//由于mode-delete是动态创建的,所以要使用delegate绑定事件
 		var type ='choose', //定义类型
 			real = $(this).parents().attr('data-parent'), //获取父类的data-parent属性
 			data = $('#'+real).find('.hidden-data').html(), //获取内容
@@ -213,16 +218,161 @@
 </article>
 </section>
 
-<!-- Footer-->
-<footer>
-<p>
-	Copyright © 2011. Built with
-	<a href="http://nodejs.org/">Node.js </a>using a<a href="https://github.com/visionmedia/jade/">jade </a>template. 
-Hosted by 
-	<a href="http://cramerdev.com/">Cramer Development</a>.
-</p>
-</footer>
-<script src="jquery.min.js"></script>
-<script src="prettify.js"></script>
+<!-- <section>
+	<h2>后台的html关键代码</h2>
+	<article>
+	<h2></h2>
+	<p>下面代码主要是后台显示出来</p>
+	<div>
+	<pre class="prettyprint">
+		<code>
+
+   		</code>
+	</pre>
+	</div>
+</article>
+</section> -->
+
+<section>
+	<h2>后台PHP关键代码</h2>
+	<article>
+	<h2></h2>
+	<p>下面代码主要是根据app传入的数据进行数据库操作,包括插入数据,删除数据,读取数据.</p>
+	<div>
+	<pre class="prettyprint">
+		<code>
+&lt;?php 
+//连接数据库需要的参数
+require("conn.php");
+//时间,用于插入数据库
+$addtime=date("Y,m,d",time());
+//打开连接数据库
+$conn=mysql_open(); 
+
+//判断时候有name参数,没有则为空
+if(isset($_GET['name'])){
+	$name = json_encode($_GET['name']);
+	$name = json_decode($name);//json处理
+	$name = str_replace('"', '', $name);//去除字符串的双引号
+}else{
+	$name = '';
+}
+//获取参数里面的温度
+$tmp = json_encode($_GET['tmp']);
+//获取参数里面的亮度
+$light = json_encode($_GET['light']);
+//获取参数里面的开关状态
+$open = json_encode($_GET['open']);
+//获取参数里面的id
+$idd = json_encode($_GET['idd']);
+
+//去除字符串的双引号
+$tmp=str_replace('"', '', $tmp);
+$light=str_replace('"', '', $light);
+$open=str_replace('"', '', $open);
+$idd=str_replace('"', '', $idd);
+
+//获取参数里面的状态
+$type = json_encode($_GET['type']);
+
+//getJson必备的参数,成功后必须echo出来
+$callback = $_GET['callback'].'('.json_encode($_GET['type']).')';
+
+//判断状态实现不同的spl语句
+if($type == '"update"'){
+	//跟新current表
+	$sql = 'update current set date="'.$addtime.'",tmp="'.$tmp.'",light="'.$light.'",open="'.$open.'",name="'.$name.'" where id = "1"';
+	$result=mysql_query($sql);
+	echo($callback);//输出callback
+}elseif($type == '"addmode"'){
+	//插入demo表
+	$sql= "insert into demo(date,tmp,light,open,name) values('".$addtime."','".$tmp."','".$light."','".$open."','".$name."')";
+	$result=mysql_query($sql);
+	echo($callback);//输出callback
+	// echo($name);
+}elseif($type == '"getcheck"'){
+	//从current表获取数据
+	$sql = mysql_query("select * from current where id = '1'");
+	$rs = mysql_fetch_object($sql);
+	$json=array("name"=>$rs->name,"tmp"=>$rs->tmp,"light"=>$rs->light,"open"=>$rs->open); 
+	//输出json数据到前台
+	$json = $_GET['callback'].'('.json_encode($json).')';
+	echo($json);
+}elseif($type == '"getall"'){
+	//从demo表获取数据
+	$sql = mysql_query("select * from demo");
+	//循环输出数据
+	while($rs = mysql_fetch_array($sql)){
+		$rows[] = $rs; //保存到数组
+		// $json=array("name"=>$rs->name,"tmp"=>$rs->tmp,"light"=>$rs->light,"open"=>$rs->open); 
+	}
+	$json = $_GET['callback'].'('.json_encode($rows).')';
+	echo($json);
+}elseif($type == '"choose"'){
+	//跟新current表
+	$sql = 'update current set date="'.$addtime.'",tmp="'.$tmp.'",light="'.$light.'",open="'.$open.'",name ="'.$name.'" where id = "1"';
+	$result=mysql_query($sql);
+	echo($callback);
+	// echo($sql);
+}elseif($type == '"delete"'){
+	//删除demo表的数据
+	$sql = 'delete from demo where id = "'.$idd.'"';
+	$result=mysql_query($sql);
+	//删除后重新生成数据
+	$sql2 = mysql_query("select * from demo");
+	while($rs = mysql_fetch_array($sql2)){
+		$rows[] = $rs;
+	}
+	$json = $_GET['callback'].'('.json_encode($rows).')';
+	echo($json);
+}
+//退出程序
+exit;
+
+?&gt;
+   		</code>
+	</pre>
+	</div>
+</article>
+
+	<article>
+	<h2>后台php关键代码</h2>
+	<p>下面代码主要是根据后台设置进行数据库操作,包括插入数据,删除数据,读取数据.</p>
+	<div>
+	<pre class="prettyprint">
+		<code>
+//引入session文件		
+require("session_inside.php");
+//引入数据库配置文件
+require("conn.php");
+//时间
+$addtime=date("Y,m,d",time());
+
+//连接数据库
+$conn=mysql_open();
+$type = $_GET['action'];
+
+//根据不同类型选择不同的sql语句
+if($type == 'add'){
+	$bcurl='modelist.php?page=0';
+	$sql="insert into demo(name,tmp,light,open,date) values('".$_POST["addmode-name"]."','".$_POST["addmode-tmp"]."','".$_POST["addmode-light"]."','".$_POST["addmode-swi"]."','".$addtime."')";
+}elseif ($type == 'update') {
+	$bcurl='check.php';
+	$sql="update current set name='默认',tmp='".$_POST["tmp"]."',light='".$_POST["light"]."',open='".$_POST["swi"]."' where id=1";
+}
+//执行mysql语句
+$result=mysql_query($sql);
+//关闭数据库
+mysql_close($conn);
+//输出成功信息
+echo "&lt;script language=javascript&gt;alert('成功!');location='$bcurl';&lt;/script&gt;"; 
+	   	</code>
+	</pre>
+	</div>
+</article>	
+
+</section>
+<script src="http://cornelia.com.cn/public/jquery.min.js"></script>
+<script src="http://cornelia.com.cn/public/prettify.js"></script>
 </body>
 </html>

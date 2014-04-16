@@ -240,6 +240,8 @@ pre {
 	border-left: 4px solid #566D82;
 	margin-bottom: 1.25em;
 	background: #0F192A;
+	overflow: hidden;
+	white-space:pre-wrap; white-space:-moz-pre-wrap; white-space:-pre-wrap; white-space:-o-pre-wrap; word-wrap:break-word;
 }
 
 code {
